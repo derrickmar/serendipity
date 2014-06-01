@@ -38,3 +38,55 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+gem "bootstrap-sass" # for bootstrap css
+gem 'faker' #generate fake names
+gem 'annotate' #provides attribute annotation on model files
+gem 'sprockets' # allows for loading js files
+# formats things nicely on rails console
+gem 'hirb'
+# helps understand embedded ruby for better tabbing on sublime
+gem 'htmlbeautifier'
+# for file attachment
+gem "paperclip"
+# for file storage on aws
+gem 'aws-sdk'
+# for sitemap generation
+gem 'sitemap_generator'
+# allows you to use jquery-ui library
+gem 'jquery-ui-rails'
+# for environmental variables (hide from git)
+gem 'figaro'
+
+
+group :development, :test do
+  # This includes rspec-rails in a development environment so that we have
+  # access to RSpec-specific generators, and it includes it in test mode in order to
+  # run the tests.
+  gem 'rspec-rails'
+  # advanced setup gems to speed up testing with spork server and guard
+  # gem 'guard-rspec', '2.5.0'
+  # gem 'spork-rails', '4.0.0'
+  # gem 'guard-spork', '1.5.0'
+  # simple solution to managing child prcesses 
+  gem 'childprocess'
+end
+
+group :test do
+  # capybara dependecy
+  gem 'selenium-webdriver'
+  # allows us to simulate a user’s interaction with the
+  # sample application using a natural English-like syntax
+  gem 'capybara'
+  # helps us create objects
+  gem 'factory_girl_rails'
+  # optional: let's us test using cucumber syntax (more like English)
+  gem 'cucumber-rails', :require => false
+  # cucumber dependecy
+  gem 'database_cleaner', github: 'bmabey/database_cleaner'
+end
+
+group :production do
+  # Used by Heroku to serve static assets such as images and stylesheets.
+  gem 'rails_12factor'
+end
