@@ -1,3 +1,106 @@
-// Place all the styles related to the StaticPages controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+$yale-blue: #1c2045;
+$gold: #e7c254;
+
+@mixin smooth_transition($type) {
+	-webkit-transition: $type 1s ease-in-out;
+	-moz-transition: $type 1s ease-in-out;
+	-ms-transition: $type 1s ease-in-out;
+	-o-transition: $type 1s ease-in-out;
+}
+
+html, body {
+	// padding: 70px 0 0 0;
+	margin:0;
+	height:100%;
+	min-height:100%;
+}
+
+body {
+	// padding-top: 70px;
+}
+
+#logo {
+	width: 150px;	
+}
+
+#logo_homepage {
+	display: block;
+	width: 250px;
+	margin: auto;
+	// position: fixed;
+	// left: 50%;
+	// top: 50%;
+	// margin-top: -200px; //height
+	// margin-left: -125px; //width
+
+}
+
+#tagline_homepage {
+	text-align: center;
+	font-size: 24px;
+	font-style: oblique;
+	width: 100%;
+}
+
+.table-custom {
+	display: table;
+}
+
+.tc-vert-center {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.vertical-align {
+	vertical-align: middle;
+	// padding-bottom: 50px;
+}
+
+.homeblock {
+	height: 50%;
+	width: 50%;
+	padding: 0 70px;
+}
+
+#homeblock-holder {
+	position: relative;
+}
+
+.blue-bg {
+	background-color: $yale-blue;
+	@include smooth_transition(background-color);
+}
+
+.gold-bg {
+	background-color: $gold;
+	@include smooth_transition(background-color);
+}
+
+.white-bg {
+	background-color: white;
+	@include smooth_transition(background-color);
+}
+
+.blue {
+	color: $yale-blue;
+}
+
+.white {
+	color: white;
+}
+
+.home-steps-title {
+	text-align: center;
+	font-size: 32px;
+}
+
+.home-steps-desc {
+	font-size: 20px;
+	padding: 12px;
+}
+
+// .tableCell {
+// 	// position: absolute;
+// }

@@ -57,6 +57,7 @@ gem 'sitemap_generator'
 gem 'jquery-ui-rails'
 # for environmental variables (hide from git)
 gem 'figaro'
+gem 'devise'
 
 
 group :development, :test do
@@ -83,7 +84,7 @@ group :test do
   # optional: let's us test using cucumber syntax (more like English)
   gem 'cucumber-rails', :require => false
   # cucumber dependecy
-  gem 'database_cleaner', github: 'bmabey/database_cleaner'
+  gem 'database_cleaner'
 end
 
 group :production do
