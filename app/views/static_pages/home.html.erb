@@ -1,36 +1,43 @@
-<div id="fullpage">
-	<div class="table-custom section">
+<div id="fullpage" data-no-turbolink>
+	<div id="first" class="table-custom section active">
 		<div class="vertical-align">
 			<%= image_tag("logo_only.png", id: "logo_homepage") %>
 			<div id="tagline_homepage">Foster relationships with a fellow CAL student you may have otherwise not met.</div>
 		</div>
 	</div>
-	<div class="section second">
+	<div id="second" class="section">
 		<div id="homeblock-holder">
-			<div class="row">
-				<div id="homeblock1" class="col-xs-6 homeblock blue-bg table-custom">
-					<div class="home-steps-title tc-vert-center white">
-						<span>Meet someone new</span>
+			<div class="container-fluid">
+				<div class="row">
+					<div id="homeblock1" class="col-xs-12 col-lg-6 homeblock blue-bg table-custom">
+						<div class="home-steps-title tc-vert-center white">
+							<span>Meet someone new</span>
+						</div>
+					</div>
+					<div id="homeblock4" class="col-xs-12 col-lg-6 homeblock gold-bg table-custom">
+						<div class="home-steps-title tc-vert-center blue">
+							<span>Foster</span>
+						</div>
 					</div>
 				</div>
-				<div id="homeblock4" class="col-xs-6 homeblock gold-bg table-custom">
-					<div class="home-steps-title tc-vert-center blue">
-						<span>Foster</span>
+				<div class="row">
+					<div id="homeblock2" class="col-xs-12 col-lg-6 homeblock gold-bg table-custom">
+						<div class="home-steps-title tc-vert-center blue">
+							<span>Real talk</span>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div id="homeblock2" class="col-xs-6 homeblock gold-bg table-custom">
-					<div class="home-steps-title tc-vert-center blue">
-						<span>Real talk</span>
-					</div>
-				</div>
-				<div id="homeblock3" class="col-xs-6 homeblock blue-bg table-custom">
-					<div class="home-steps-title tc-vert-center white">
-						<span>Reflect</span>
+					<div id="homeblock3" class="col-xs-12 col-lg-6 homeblock blue-bg table-custom">
+						<div class="home-steps-title tc-vert-center white">
+							<span>Reflect</span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+	<% if !user_signed_in? %>
+		<div id="third" class="section">
+			<%= render "signup_page" %>
+		</div>
+	<% end %>
 </div>

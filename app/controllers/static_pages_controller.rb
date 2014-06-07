@@ -1,5 +1,10 @@
 class StaticPagesController < ApplicationController
   def home
+  	puts params
+  	if params[:error_message] != nil
+  		puts "YAYAAYYAAY"
+  		flash[:alert] = params[:error_message].html_safe
+  	end
   end
 
   def contact

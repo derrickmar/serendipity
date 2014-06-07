@@ -4,10 +4,28 @@ $yale-blue: #1c2045;
 $gold: #e7c254;
 
 @mixin smooth_transition($type) {
-	-webkit-transition: $type 1s ease-in-out;
-	-moz-transition: $type 1s ease-in-out;
-	-ms-transition: $type 1s ease-in-out;
-	-o-transition: $type 1s ease-in-out;
+	-webkit-transition: $type 0.5s ease-in-out;
+	-moz-transition: $type 0.5s ease-in-out;
+	-ms-transition: $type 0.5s ease-in-out;
+	-o-transition: $type 0.5s ease-in-out;
+}
+
+@mixin rounderCorners($radius) {
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+}
+
+@mixin notifications($bg) {
+	position: absolute;
+	z-index: 10000;
+	right: 0px;
+	padding: 5px;
+	@include rounderCorners(5px);
+	margin: 40px;
+	background-color: $bg;
+	width: 400px;
+	padding: 15px;
 }
 
 html, body {
@@ -18,23 +36,109 @@ html, body {
 }
 
 body {
-	// padding-top: 70px;
+	// overflow-y: scroll !important;
 }
 
-#logo {
-	width: 150px;	
+label {
+	font-size: 20px;
+	margin-top: 10px;
+	&.checkbox-label {
+		font-size: 14px;
+	}
 }
+
+input[type=text], input[type=password], input[type=email], textarea {
+	@include smooth_transition(all);
+	width: 100%;
+	&.interest {
+		margin-bottom: 5px;
+	}
+	outline: none;
+	padding: 3px 0px 3px 3px;
+	margin: 5px 1px 3px 0px;
+	border: 1px solid #DDDDDD;
+	&:focus {
+		box-shadow: 0 0 5px $yale-blue;
+		border: 1px solid $yale-blue;
+	}
+}
+
+input[type=checkbox] {
+	margin: 0px 5px;
+}
+
+.pad70 {
+	padding-top: 70px;
+}
+
+.pad70bottom {
+	padding-bottom: 70px;
+}
+
+.scrolly {
+	overflow-y: scroll;
+	height: 100%;
+}
+
+// prevent parents from collapsing wiht floated divs
+.clearfix {
+	display: inline-block;
+    width: 100%;
+}
+
+.btn {
+	color: white;
+	background-color: $yale-blue;
+	width: 100%;
+	margin-top: 15px;
+	@include smooth_transition(all);
+	&:hover {
+		color: white;
+		opacity: 0.95;
+	}
+	&:focus {
+		color: white;
+	}
+	// &.btnPadTop {
+	// 	padding: 15px;
+	// }
+}
+
+
+#logo {
+	max-width: 150px;
+	margin-top: -5px;
+}
+
+.navbar-brand, .navbar-toggle,
+.navbar-nav li a.widen {
+    line-height: 80px;
+    height: 80px;
+    padding-top: 0;
+}
+
+.navbar-toggle {
+	height: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	padding: 0 5px !important;
+	z-index: 1;
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+}
+
 
 #logo_homepage {
 	display: block;
 	width: 250px;
 	margin: auto;
-	// position: fixed;
-	// left: 50%;
-	// top: 50%;
-	// margin-top: -200px; //height
-	// margin-left: -125px; //width
-
 }
 
 #tagline_homepage {
@@ -42,6 +146,7 @@ body {
 	font-size: 24px;
 	font-style: oblique;
 	width: 100%;
+	padding: 0px 15px;
 }
 
 .table-custom {
@@ -60,8 +165,6 @@ body {
 
 .homeblock {
 	height: 50%;
-	width: 50%;
-	padding: 0 70px;
 }
 
 #homeblock-holder {
@@ -101,6 +204,60 @@ body {
 	padding: 12px;
 }
 
-// .tableCell {
-// 	// position: absolute;
-// }
+.notification-notice {
+	@include notifications(rgba(0, 130, 0, 0.6));
+}
+
+.notification-alert {
+	@include notifications(rgba(255, 0, 0, 0.6));
+}
+
+.x-alert {
+	float: right;
+	position: relative;
+	top: -10px;
+	font-size: 18px;
+}
+
+.notice, .alert {
+	padding: 0;
+	margin: 0;
+}
+
+.add_interests {
+	font-size: 18px;
+	float: right;
+	margin-bottom: 15px;
+	&:hover {
+		opacity: 0.7;
+		cursor: pointer;
+	}
+}
+
+#signup-header {
+	text-align: center;
+}
+
+.devise_links {
+	margin-top: 15px;
+}
+
+#error_explanation {
+	background-color: rgba(255, 0, 0, 0.6);
+	@include rounderCorners(5px);
+	padding: 10px;
+	h2 {
+		font-size: 20px;
+		margin: 0 0 10px 0;
+	}
+	ul {
+		margin: 0;
+	}
+}
+
+.x-alert {
+	&:hover {
+		opacity: 0.95;
+		cursor: pointer;
+	}
+}

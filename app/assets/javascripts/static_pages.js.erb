@@ -1,0 +1,170 @@
+$(document).on('page:fetch', function() {
+    console.log("page fetch")
+});
+
+$(document).on('page:change', function() {
+    console.log("page change");
+}); 
+
+// # to get correct navbar height after images loaded
+$(window).load(function(){  
+});  
+
+$(document).ready(function() {
+
+    console.log($('.navbar-default').height());
+    $('#fullpage').fullpage({
+        navigation: true,
+        navigationTooltips: ['Serendipity', 'How it works', ' Sign up'],
+        resize: false,
+        'normalScrollElements': '.interest_holder'
+    });
+
+    setAbsolute($('.second').find('.tableCell'));
+
+    homeblockFade($('#homeblock1'),
+        "Every two weeks, we’ll introduce you to someone at Cal. Choose a time and place and get ready to experience something amazing.",
+        $('#homeblock1').text(),
+        'white');
+
+    homeblockFade($('#homeblock2'),
+        "We all hate small talk. So we came up with a cool solution to get straight to the real stuff.",
+        $('#homeblock2').text(),
+        'blue');
+
+    homeblockFade($('#homeblock3'),
+        "Reflect on your experience by telling us your stories and giving us recommendations how we can make this initiative better.",
+        $('#homeblock3').text(),
+        'white');
+
+    homeblockFade($('#homeblock4'),
+        "Foster relationships with those you really connect with.",
+        $('#homeblock4').text(),
+        'blue');
+
+    addInterest($('.add_interests'));
+    addInterestEnter($('.interest'));
+    // fadeOutAfterLoad($('.notifications'));
+
+    console.log($('#error_explanation').text());
+    if ($('#error_explanation').text().indexOf("We cannot create your account") >= 0) {
+        console.log("checking if signup error");
+        $.fn.fullpage.moveTo(3); 
+    }
+
+    $(window).bind("resize", mobileResponsive);
+    mobileResponsive();
+
+    hideAlert();
+});
+
+function hideAlert() {
+    $('.x-alert').click(function() {
+        $(this).parent().hide();
+    })
+}
+
+function mobileResponsive() {
+    if ($('#desktopTest3').is(':hidden')) {
+        setSizeOfHomeBlocks(4);
+        $('.widen').removeClass('widen');
+    } else if ($('#desktopTest2').is(':hidden')) {
+        setSizeOfHomeBlocks(4);
+        console.log("small");
+        $('.navbar-nav li a').addClass('widen');
+    } else {
+        setSizeOfHomeBlocks(2);
+        $('.navbar-nav li a').addClass('widen');
+        console.log("md or lg");
+    }
+}
+
+function setSizeOfHomeBlocks(division) {
+    console.log("navbar height: " + $('.navbar').height());
+    // section one has some weird padding
+    $('#homeblock-holder').css("top", $('.navbar').height());
+    $('#homeblock-holder').closest(".tableCell").css("vertical-align", "top");
+    var h = $('body').height() - $('.navbar').height();
+    console.log(h);
+    $('.homeblock').css("height", h / division);
+}
+
+function setFontSizeOfHomeBlocks() {
+    if ($('#desktopTest3').is(':hidden') || $('#desktopTest2').is(':hidden')) {
+        $('.home-steps-desc').css("font-size", "14px");
+    } else {
+        $('.home-steps-desc').css("font-size", "20px");
+    }
+}
+
+function setAbsolute(el) {
+    el.css("position", "absolute");
+}
+
+function homeblockFade(el, textIn, textOrig, colorOrig) {
+    el.hoverIntent(
+        function() {
+            $(this).addClass("white-bg");
+            $(this).find('span').fadeOut(250, function() {
+                $(this).text(textIn);
+                $(this).addClass('blue').removeClass(colorOrig);
+                $(this).addClass('home-steps-desc');
+                setFontSizeOfHomeBlocks();
+            }).fadeIn(250);
+        },
+        function() {
+            $(this).removeClass("white-bg");
+            $(this).find('span').fadeOut(250, function() {
+                $(this).text(textOrig);
+                $(this).addClass(colorOrig).removeClass('blue');
+                $('.home-steps-desc').css("font-size", "");
+                $(this).removeClass('home-steps-desc');
+            }).fadeIn(250);
+        });
+}
+
+function fadeOutAfterLoad(el, time) {
+    setTimeout(function() {
+        el.fadeOut(2000);
+    }, 5000)
+}
+
+function addInterest(el) {
+    el.click(function() {
+        $('.interest_holder').append('<input name="user[interests][]" type="text">');
+        if ($('.interest_holder').height() > 250) {
+            $('.interest_holder').css("overflow-y", "scroll");
+            $('.interest_holder').css("height", "250px");
+        }
+    })
+}
+
+function addInterestEnter(el) {
+    el.keyup(function(e) {
+        console.log("got here");
+        if (e.keyCode == 13) {
+            console.log(e);
+            e.preventDefault();
+            console.log("got here too");
+            return false;
+        }
+    });
+}
+
+// function hoverTabUp(dom) {
+//     dom.hover(
+//         function() {
+//             console.log("in hoverTabUp");
+//             if (!$(this).hasClass('selected') && !$(this).hasClass('selected2')) {
+//                 $(this).animate({
+//                     top: "-=2"
+//                 }, 100);
+//             }
+//         }, function(e) {
+//             if (!$(this).hasClass('selected') && !$(this).hasClass('selected2')) {
+//                 $(this).animate({
+//                     top: "+=2"
+//                 }, 100);
+//             }
+//         });
+// }
