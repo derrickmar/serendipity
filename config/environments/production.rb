@@ -103,6 +103,4 @@ Rails.application.configure do
     password: ENV["TSPW"]
   }
 
-
-
 end
