@@ -58,6 +58,7 @@ gem 'sitemap_generator'
 gem 'jquery-ui-rails'
 # for environmental variables (hide from git)
 gem 'figaro'
+gem 'thor'
 gem 'devise'
 
 

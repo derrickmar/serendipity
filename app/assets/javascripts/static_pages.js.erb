@@ -3,21 +3,24 @@ $(document).on('page:fetch', function() {
 });
 
 $(document).on('page:change', function() {
+    console.log("navbar on change" + $('.navbar').height());
     console.log("page change");
 }); 
 
 // # to get correct navbar height after images loaded
-$(window).load(function(){  
-});  
+$(window).load(function() { 
+    mobileResponsive();
+});
 
 $(document).ready(function() {
 
-    console.log($('.navbar-default').height());
+    console.log("navbar on document " + $('.navbar-default').height());
+    // we can call fullapge on a jquery object because of $.fn.fullpage
     $('#fullpage').fullpage({
         navigation: true,
         navigationTooltips: ['Serendipity', 'How it works', ' Sign up'],
         resize: false,
-        'normalScrollElements': '.interest_holder'
+        normalScrollElements: ".interest_holder"
     });
 
     setAbsolute($('.second').find('.tableCell'));
@@ -43,39 +46,40 @@ $(document).ready(function() {
         'blue');
 
     addInterest($('.add_interests'));
-    addInterestEnter($('.interest'));
+
+    // addInterestEnter($('.interest'));
     // fadeOutAfterLoad($('.notifications'));
 
-    console.log($('#error_explanation').text());
-    if ($('#error_explanation').text().indexOf("We cannot create your account") >= 0) {
+    // console.log($('#custom_error').text());
+    if ($('#custom_error').text().indexOf("We cannot create your account") >= 0) {
         console.log("checking if signup error");
         $.fn.fullpage.moveTo(3); 
     }
 
     $(window).bind("resize", mobileResponsive);
-    mobileResponsive();
-
     hideAlert();
 });
 
 function hideAlert() {
     $('.x-alert').click(function() {
+        console.log("x clicked");
         $(this).parent().hide();
     })
 }
 
+// need to add class before we setSizeOfHomeBlocks (because getting changed height of navbar)
 function mobileResponsive() {
     if ($('#desktopTest3').is(':hidden')) {
-        setSizeOfHomeBlocks(4);
         $('.widen').removeClass('widen');
-    } else if ($('#desktopTest2').is(':hidden')) {
         setSizeOfHomeBlocks(4);
-        console.log("small");
+    } else if ($('#desktopTest2').is(':hidden')) {
+        // small
         $('.navbar-nav li a').addClass('widen');
+        setSizeOfHomeBlocks(4);
     } else {
-        setSizeOfHomeBlocks(2);
+        // md or lg
         $('.navbar-nav li a').addClass('widen');
-        console.log("md or lg");
+        setSizeOfHomeBlocks(2);
     }
 }
 
@@ -139,32 +143,14 @@ function addInterest(el) {
     })
 }
 
-function addInterestEnter(el) {
-    el.keyup(function(e) {
-        console.log("got here");
-        if (e.keyCode == 13) {
-            console.log(e);
-            e.preventDefault();
-            console.log("got here too");
-            return false;
-        }
-    });
-}
-
-// function hoverTabUp(dom) {
-//     dom.hover(
-//         function() {
-//             console.log("in hoverTabUp");
-//             if (!$(this).hasClass('selected') && !$(this).hasClass('selected2')) {
-//                 $(this).animate({
-//                     top: "-=2"
-//                 }, 100);
-//             }
-//         }, function(e) {
-//             if (!$(this).hasClass('selected') && !$(this).hasClass('selected2')) {
-//                 $(this).animate({
-//                     top: "+=2"
-//                 }, 100);
-//             }
-//         });
+// function addInterestEnter(el) {
+//     el.keyup(function(e) {
+//         console.log("got here");
+//         if (e.keyCode == 13) {
+//             console.log(e);
+//             e.preventDefault();
+//             console.log("got here too");
+//             return false;
+//         }
+//     });
 // }

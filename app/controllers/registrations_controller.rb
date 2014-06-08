@@ -7,6 +7,7 @@ class RegistrationsController < Devise::RegistrationsController
 		resource_saved = resource.save
 		yield resource if block_given?
 		if resource_saved
+			@name = resource.name
 			if resource.active_for_authentication?
 				set_flash_message :notice, :signed_up if is_flashing_format?
 				sign_up(resource_name, resource)
@@ -22,7 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
 			sentence = "We cannot create your account because of " + ActionController::Base.helpers.pluralize(resource.errors.count, "error")
 
 			html = <<-HTML
-			<div>
+			<div id="custom_error">
 				<h5>#{sentence}</h5>
 				<ul>#{messages}</ul>
 			</div>
